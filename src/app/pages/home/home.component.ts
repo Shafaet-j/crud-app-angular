@@ -26,17 +26,20 @@ export class HomeComponent {
   handleOk(): void {
     console.log('Button ok clicked!');
     this.isVisible = false;
+    this.onSubmit();
   }
 
   handleCancel(): void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
+    this.registrationForm.reset();
   }
 
   onSubmit() {
     if (this.registrationForm.invalid) {
       alert('please input');
     } else {
+      console.log(this.registrationForm.value);
     }
   }
 }
