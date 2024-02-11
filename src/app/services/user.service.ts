@@ -11,7 +11,13 @@ const API = environment.apiBaseLink + '/user/';
 export class UserService {
   constructor(private httpClient: HttpClient) {}
 
-  getAll() {
+  getAll(filter?: any) {
+    return this.httpClient.post<{ data: User[]; message: string }>(
+      API + 'all-user',
+      { filter }
+    );
+  }
+  getAllUser() {
     return this.httpClient.get<{ data: User[]; message: string }>(
       API + 'all-user'
     );

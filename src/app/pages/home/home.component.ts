@@ -26,7 +26,9 @@ export class HomeComponent {
   constructor(
     private userService: UserService,
     private notification: NzNotificationService
-  ) {}
+  ) {
+    this.getAll();
+  }
 
   showModal(): void {
     this.isVisible = true;
@@ -64,9 +66,10 @@ export class HomeComponent {
     }
   }
 
-  getAllUser() {
-    this.userService.getAll().subscribe((res) => {
+  getAll() {
+    this.userService.getAllUser().subscribe((res) => {
       this.users = res.data;
+      console.log(this.users);
     });
   }
 
@@ -75,7 +78,7 @@ export class HomeComponent {
       (res) => {
         console.log(res);
         this.notification.create('success', 'User added', res.message);
-        // this.getAllUser();
+        this.getAll();
         this.registrationForm.reset();
       },
       (err) => {
