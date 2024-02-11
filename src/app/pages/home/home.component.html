@@ -120,9 +120,9 @@
             <td>{{ data.address }}</td>
             <td>{{ data.isActive }}</td>
             <td>
-              <a>Action 一 {{ data.name }}</a>
+              <button nz-button [nzType]="'primary'">Edit</button>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>Delete</a>
+              <button nz-button [nzType]="'primary'">Delete</button>
             </td>
           </tr>
         </tbody>
