@@ -13,4 +13,7 @@ export class UserService {
       API + 'add'
     );
   }
+  add(data: User) {
+    return this.httpClient.post<{ message: string }>(API + 'add', data);
+  }
 }
