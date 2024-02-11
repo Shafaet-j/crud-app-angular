@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { User } from 'src/app/interface/user';
+
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,16 +12,21 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent {
   registrationForm: FormGroup = new FormGroup({
-    Name: new FormControl(null),
-    Email: new FormControl(null),
-    Phone: new FormControl(null),
-    Age: new FormControl(null),
-    Address: new FormControl(null),
+    name: new FormControl(null, Validators.required),
+    email: new FormControl(null, Validators.required),
+    phone: new FormControl(null, Validators.required),
+    age: new FormControl(null, Validators.required),
+    address: new FormControl(null, Validators.required),
     isActive: new FormControl(null),
   });
   isVisible = false;
+  id = '';
+  users: User[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private notification: NzNotificationService
+  ) {}
 
   showModal(): void {
     this.isVisible = true;
@@ -38,9 +46,42 @@ export class HomeComponent {
 
   onSubmit() {
     if (this.registrationForm.invalid) {
-      alert('please input');
+      this.notification.create(
+        'warning',
+        'Data Invalid',
+        'Please complete the required fields'
+      );
     } else {
-      console.log(this.registrationForm.value);
+      if (this.id) {
+        let finalData = {
+          ...this.registrationForm.value,
+          ...{ _id: this.id },
+        };
+        // this.edit(finalData);
+      } else {
+        this.addData(this.registrationForm.value);
+      }
     }
+  }
+
+  getAllUser() {
+    this.userService.getAll().subscribe((res) => {
+      this.users = res.data;
+    });
+  }
+
+  addData(data: User) {
+    this.userService.add(data).subscribe(
+      (res) => {
+        console.log(res);
+        this.notification.create('success', 'User added', res.message);
+        // this.getAllUser();
+        this.registrationForm.reset();
+      },
+      (err) => {
+        this.notification.create('error', 'Failed', err.message);
+        this.registrationForm.reset();
+      }
+    );
   }
 }

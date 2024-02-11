@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 registerLocaleData(en);
 
@@ -36,6 +37,7 @@ registerLocaleData(en);
     NzSelectModule,
     NzTableModule,
     NzDividerModule,
+    NzNotificationModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

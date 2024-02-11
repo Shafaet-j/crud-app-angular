@@ -25,7 +25,7 @@
                     class="w-full border py-2"
                     type="text"
                     nz-input
-                    formControlName="Name"
+                    formControlName="name"
                     placeholder="type your name"
                   />
                 </nz-input-group>
@@ -38,7 +38,7 @@
                     class="w-full border py-2"
                     type="text"
                     nz-input
-                    formControlName="Email"
+                    formControlName="email"
                     placeholder="type your Email"
                   />
                 </nz-input-group>
@@ -51,7 +51,7 @@
                     class="w-full border py-2"
                     type="number"
                     nz-input
-                    formControlName="Phone"
+                    formControlName="phone"
                     placeholder="type your Phone"
                   />
                 </nz-input-group>
@@ -64,7 +64,7 @@
                     class="w-full border py-2"
                     type="number"
                     nz-input
-                    formControlName="Age"
+                    formControlName="age"
                     placeholder="type your Age"
                   />
                 </nz-input-group>
@@ -77,7 +77,7 @@
                     class="w-full border py-2"
                     type="text"
                     nz-input
-                    formControlName="Address"
+                    formControlName="address"
                     placeholder="Address"
                   />
                 </nz-input-group>
@@ -89,8 +89,8 @@
                 formControlName="isActive"
                 class="w-full"
               >
-                <nz-option nzLabel="Active" nzValue="active"></nz-option>
-                <nz-option nzLabel="Not active" nzValue="notactive"></nz-option>
+                <nz-option nzLabel="Active" nzValue="true"></nz-option>
+                <nz-option nzLabel="Not active" nzValue="false"></nz-option>
               </nz-select>
             </nz-form-item>
           </form>
@@ -98,7 +98,7 @@
       </nz-modal>
     </div>
     <div class="bg-slate-50 py-2">
-      <nz-table #basicTable>
+      <nz-table #basicTable [nzData]="users">
         <thead>
           <tr>
             <th>Name</th>
@@ -111,7 +111,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data">
+          <tr *ngFor="let data of users">
             <td>{{ data.name }}</td>
             <td>{{ data.age }}</td>
             <td>{{ data.address }}</td>
