@@ -33,7 +33,10 @@ export class HomeComponent {
     this.isVisible = false;
   }
 
-  submitForm(): void {
-    console.log('submit', this.registrationForm.value);
+  onSubmit() {
+    if (this.registrationForm.invalid) {
+      alert('please input');
+    } else {
+    }
   }
 }

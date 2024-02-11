@@ -16,6 +16,8 @@ import en from '@angular/common/locales/en';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 registerLocaleData(en);
 
@@ -32,6 +34,8 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NzSelectModule,
+    NzTableModule,
+    NzDividerModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

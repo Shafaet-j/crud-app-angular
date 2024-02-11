@@ -2,20 +2,21 @@
   <div class="bg-slate-100 w-full p-5">
     <div class="flex items-center justify-between mb-5">
       <button nz-button [nzType]="'primary'" (click)="showModal()">
-        <span>Add User</span>
+        <p><span nz-icon nzType="plus" nzTheme="outline"></span> Add User</p>
       </button>
+
       <nz-modal
         [(nzVisible)]="isVisible"
-        nzTitle="The first Modal"
+        nzTitle="Add User"
         (nzOnCancel)="handleCancel()"
         (nzOnOk)="handleOk()"
       >
         <ng-container *nzModalContent>
           <form
             nz-form
-            [formGroup]="registrationForm"
             class="login-form"
-            (ngSubmit)="submitForm()"
+            [formGroup]="registrationForm"
+            (ngSubmit)="onSubmit()"
           >
             <nz-form-item>
               <nz-form-control nzErrorTip="Please input your name!">
@@ -92,18 +93,36 @@
                 <nz-option nzLabel="Not active" nzValue="notactive"></nz-option>
               </nz-select>
             </nz-form-item>
-
-            <button
-              nz-button
-              class="login-form-button login-form-margin"
-              [nzType]="'primary'"
-            >
-              Submit
-            </button>
           </form>
         </ng-container>
       </nz-modal>
     </div>
-    <div class="bg-slate-50 py-2">skdh</div>
+    <div class="bg-slate-50 py-2">
+      <nz-table #basicTable>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+              <a>Action 一 {{ data.name }}</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
   </div>
 </section>
