@@ -17,6 +17,12 @@ export class UserService {
       { filter }
     );
   }
+  edit(data: User) {
+    return this.httpClient.put<{ message: string }>(
+      API + 'singleuser/' + data._id,
+      data
+    );
+  }
   getAllUser() {
     return this.httpClient.get<{ data: User[]; message: string }>(
       API + 'all-user'
