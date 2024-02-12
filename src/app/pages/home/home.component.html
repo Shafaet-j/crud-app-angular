@@ -4,98 +4,17 @@
       <button nz-button [nzType]="'primary'" (click)="showModal()">
         <p><span nz-icon nzType="plus" nzTheme="outline"></span> Add User</p>
       </button>
-
-      <nz-modal
-        [(nzVisible)]="isVisible"
-        nzTitle="Add User"
-        (nzOnCancel)="handleCancel()"
-        (nzOnOk)="handleOk()"
-      >
-        <ng-container *nzModalContent>
-          <form
-            nz-form
-            class="login-form"
-            [formGroup]="registrationForm"
-            (ngSubmit)="onSubmit()"
-          >
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your name!">
-                <nz-input-group nzPrefixIcon="user">
-                  <input
-                    class="w-full border py-2 pl-2"
-                    type="text"
-                    nz-input
-                    formControlName="name"
-                    placeholder="type your name"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your email!">
-                <nz-input-group nzPrefixIcon="mail">
-                  <input
-                    class="w-full border py-2 pl-2"
-                    type="text"
-                    nz-input
-                    formControlName="email"
-                    placeholder="type your Email"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your phone!">
-                <nz-input-group nzPrefixIcon="phone">
-                  <input
-                    class="w-full border py-2 pl-2"
-                    type="number"
-                    nz-input
-                    formControlName="phone"
-                    placeholder="type your Phone"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your age!">
-                <nz-input-group nzPrefixIcon="phone">
-                  <input
-                    class="w-full border py-2 pl-2"
-                    type="number"
-                    nz-input
-                    formControlName="age"
-                    placeholder="type your Age"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your Address!">
-                <nz-input-group nzPrefixIcon="lock">
-                  <input
-                    class="w-full border py-2 pl-2"
-                    type="text"
-                    nz-input
-                    formControlName="address"
-                    placeholder="Address"
-                  />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-select
-                nzPlaceHolder="Select active or not"
-                formControlName="isActive"
-                class="w-full"
-              >
-                <nz-option nzLabel="Active" nzValue="true"></nz-option>
-                <nz-option nzLabel="Not active" nzValue="false"></nz-option>
-              </nz-select>
-            </nz-form-item>
-          </form>
-        </ng-container>
-      </nz-modal>
+      <div>
+        <nz-select
+          [(ngModel)]="selectedValue"
+          (ngModelChange)="filterSelect($event)"
+          nzPlaceHolder="Filter"
+        >
+          <nz-option nzLabel="All" nzValue="all"></nz-option>
+          <nz-option nzLabel="Active" nzValue="true"></nz-option>
+          <nz-option nzLabel="Inactive" nzValue="false"></nz-option>
+        </nz-select>
+      </div>
     </div>
     <div class="bg-slate-50 py-2">
       <nz-table #basicTable [nzData]="users">
@@ -144,4 +63,95 @@
       </nz-table>
     </div>
   </div>
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Add User"
+    (nzOnCancel)="handleCancel()"
+    (nzOnOk)="handleOk()"
+  >
+    <ng-container *nzModalContent>
+      <form
+        nz-form
+        class="login-form"
+        [formGroup]="registrationForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your name!">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                class="w-full border py-2 pl-2"
+                type="text"
+                nz-input
+                formControlName="name"
+                placeholder="type your name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your email!">
+            <nz-input-group nzPrefixIcon="mail">
+              <input
+                class="w-full border py-2 pl-2"
+                type="text"
+                nz-input
+                formControlName="email"
+                placeholder="type your Email"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your phone!">
+            <nz-input-group nzPrefixIcon="phone">
+              <input
+                class="w-full border py-2 pl-2"
+                type="number"
+                nz-input
+                formControlName="phone"
+                placeholder="type your Phone"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your age!">
+            <nz-input-group nzPrefixIcon="phone">
+              <input
+                class="w-full border py-2 pl-2"
+                type="number"
+                nz-input
+                formControlName="age"
+                placeholder="type your Age"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Address!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input
+                class="w-full border py-2 pl-2"
+                type="text"
+                nz-input
+                formControlName="address"
+                placeholder="Address"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-select
+            nzPlaceHolder="Select active or not"
+            formControlName="isActive"
+            class="w-full"
+          >
+            <nz-option nzLabel="Active" nzValue="true"></nz-option>
+            <nz-option nzLabel="Not active" nzValue="false"></nz-option>
+          </nz-select>
+        </nz-form-item>
+      </form>
+    </ng-container>
+  </nz-modal>
 </section>

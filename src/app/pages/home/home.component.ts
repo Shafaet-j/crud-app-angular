@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  selectedValue: string = '';
   registrationForm: FormGroup = new FormGroup({
     name: new FormControl(null, Validators.required),
     email: new FormControl(null, Validators.required),
@@ -28,7 +29,18 @@ export class HomeComponent {
     private notification: NzNotificationService
   ) {
     this.getAll();
-    this.getallWithfiltered();
+
+    // const filter = { isActive: false };
+    // this.getallWithfiltered(filter);
+  }
+
+  filterSelect(selected: string): void {
+    console.log('Selected value:', selected);
+    if (selected === 'all') {
+      this.getAll();
+    }
+    let filter = { isActive: selected };
+    this.getallWithfiltered(filter);
   }
 
   showModal(): void {
@@ -92,8 +104,8 @@ export class HomeComponent {
     });
   }
 
-  getallWithfiltered() {
-    this.userService.getAllwithFilter().subscribe((res) => {
+  getallWithfiltered(data: any) {
+    this.userService.getAllwithFilter(data).subscribe((res) => {
       this.users = res.data;
       console.log(this.users);
     });
@@ -105,6 +117,7 @@ export class HomeComponent {
         console.log(res);
         this.notification.create('success', 'User added', res.message);
         this.getAll();
+
         this.registrationForm.reset();
       },
       (err) => {
@@ -133,6 +146,7 @@ export class HomeComponent {
           res.message
         );
         this.getAll();
+
         this.registrationForm.reset();
       },
       (err) => {
