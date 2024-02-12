@@ -28,6 +28,7 @@ export class HomeComponent {
     private notification: NzNotificationService
   ) {
     this.getAll();
+    this.getallWithfiltered();
   }
 
   showModal(): void {
@@ -86,6 +87,13 @@ export class HomeComponent {
 
   getAll() {
     this.userService.getAllUser().subscribe((res) => {
+      this.users = res.data;
+      console.log(this.users);
+    });
+  }
+
+  getallWithfiltered() {
+    this.userService.getAllwithFilter().subscribe((res) => {
       this.users = res.data;
       console.log(this.users);
     });
