@@ -87,4 +87,15 @@ export class HomeComponent {
       }
     );
   }
+  delete(id: any) {
+    this.userService.delete(id).subscribe(
+      (res) => {
+        this.notification.create('success', 'Sucessfully Deleted', res.message);
+        this.getAll();
+      },
+      (err) => {
+        this.notification.create('Error', 'Failed', err.message);
+      }
+    );
+  }
 }

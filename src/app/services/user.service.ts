@@ -27,7 +27,12 @@ export class UserService {
   }
   getSingle(id: any) {
     return this.httpClient.get<{ data: User[]; message: string }>(
-      API + 'get-by-id/' + id
+      API + 'singleuser/' + id
+    );
+  }
+  delete(id: any) {
+    return this.httpClient.delete<{ message: string }>(
+      API + 'singleuser/' + id
     );
   }
 }

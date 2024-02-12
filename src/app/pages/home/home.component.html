@@ -122,7 +122,9 @@
             <td>
               <button nz-button [nzType]="'primary'">Edit</button>
               <nz-divider nzType="vertical"></nz-divider>
-              <button nz-button [nzType]="'primary'">Delete</button>
+              <button (click)="delete(data._id)" nz-button [nzType]="'primary'">
+                Delete
+              </button>
             </td>
           </tr>
         </tbody>
