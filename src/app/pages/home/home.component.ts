@@ -32,6 +32,24 @@ export class HomeComponent {
 
   showModal(): void {
     this.isVisible = true;
+    this.id = '';
+  }
+  editshowModal(id: any): void {
+    this.isVisible = true;
+    this.id = id;
+    this.getSingle();
+  }
+
+  getSingle() {
+    this.userService.getSingle(this.id).subscribe(
+      (res) => {
+        console.log(res);
+        this.registrationForm.patchValue(res.data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   handleOk(): void {
@@ -59,7 +77,7 @@ export class HomeComponent {
           ...this.registrationForm.value,
           ...{ _id: this.id },
         };
-        // this.edit(finalData);
+        this.edit(finalData);
       } else {
         this.addData(this.registrationForm.value);
       }
@@ -95,6 +113,23 @@ export class HomeComponent {
       },
       (err) => {
         this.notification.create('Error', 'Failed', err.message);
+      }
+    );
+  }
+  edit(data: User) {
+    this.userService.edit(data).subscribe(
+      (res) => {
+        this.notification.create(
+          'success',
+          'successfully updated',
+          res.message
+        );
+        this.getAll();
+        this.registrationForm.reset();
+      },
+      (err) => {
+        this.notification.create('error', 'Failed', err.message);
+        this.registrationForm.reset();
       }
     );
   }

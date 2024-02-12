@@ -22,7 +22,7 @@
               <nz-form-control nzErrorTip="Please input your name!">
                 <nz-input-group nzPrefixIcon="user">
                   <input
-                    class="w-full border py-2"
+                    class="w-full border py-2 pl-2"
                     type="text"
                     nz-input
                     formControlName="name"
@@ -35,7 +35,7 @@
               <nz-form-control nzErrorTip="Please input your email!">
                 <nz-input-group nzPrefixIcon="mail">
                   <input
-                    class="w-full border py-2"
+                    class="w-full border py-2 pl-2"
                     type="text"
                     nz-input
                     formControlName="email"
@@ -48,7 +48,7 @@
               <nz-form-control nzErrorTip="Please input your phone!">
                 <nz-input-group nzPrefixIcon="phone">
                   <input
-                    class="w-full border py-2"
+                    class="w-full border py-2 pl-2"
                     type="number"
                     nz-input
                     formControlName="phone"
@@ -61,7 +61,7 @@
               <nz-form-control nzErrorTip="Please input your age!">
                 <nz-input-group nzPrefixIcon="phone">
                   <input
-                    class="w-full border py-2"
+                    class="w-full border py-2 pl-2"
                     type="number"
                     nz-input
                     formControlName="age"
@@ -74,7 +74,7 @@
               <nz-form-control nzErrorTip="Please input your Address!">
                 <nz-input-group nzPrefixIcon="lock">
                   <input
-                    class="w-full border py-2"
+                    class="w-full border py-2 pl-2"
                     type="text"
                     nz-input
                     formControlName="address"
@@ -118,9 +118,22 @@
             <td>{{ data.phone }}</td>
             <td>{{ data.age }}</td>
             <td>{{ data.address }}</td>
-            <td>{{ data.isActive }}</td>
             <td>
-              <button nz-button [nzType]="'primary'">Edit</button>
+              <span
+                class="size-3 inline-block rounded-full mr-1 {{
+                  data.isActive ? 'bg-green-500' : 'bg-red-500'
+                }}"
+              ></span>
+              {{ data.isActive ? "Active" : "Not active" }}
+            </td>
+            <td>
+              <button
+                (click)="editshowModal(data._id)"
+                nz-button
+                [nzType]="'primary'"
+              >
+                Edit
+              </button>
               <nz-divider nzType="vertical"></nz-divider>
               <button (click)="delete(data._id)" nz-button [nzType]="'primary'">
                 Delete
